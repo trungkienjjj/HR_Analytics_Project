@@ -4,7 +4,7 @@
 ![NumPy](https://img.shields.io/badge/Library-NumPy-orange)
 ![Status](https://img.shields.io/badge/Status-Completed-green)
 
-## Mục lục
+## 📑 Mục Lục
 1. [Giới thiệu](#1-giới-thiệu)
 2. [Dataset](#2-dataset)
 3. [Phương pháp & Thuật toán](#3-phương-pháp--thuật-toán)
@@ -12,7 +12,11 @@
 5. [Kết quả thực nghiệm](#5-kết-quả-thực-nghiệm)
 6. [Cấu trúc dự án](#6-cấu-trúc-dự-án)
 7. [Thách thức & Giải pháp](#7-thách-thức--giải-pháp)
-8. [Thông tin tác giả](#8-thông-tin-tác-giả)
+8. [Hướng phát triển (Future Improvements)](#8-hướng-phát-triển-future-improvements)
+9. [Thông tin tác giả](#9-thông-tin-tác-giả)
+10. [Đóng góp (Contributors)](#10-đóng-góp-contributors)
+11. [Liên hệ (Contact)](#11-liên-hệ-contact)
+12. [Giấy phép (License)](#12-giấy-phép-license)
 
 ---
 

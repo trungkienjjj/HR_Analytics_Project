@@ -17,7 +17,7 @@ def plot_pie_chart(data_array, title, labels=['Class 0', 'Class 1']):
 def plot_bar_chart(x_labels, y_values, title, xlabel, ylabel):
     """Vẽ biểu đồ cột"""
     plt.figure(figsize=(10, 5))
-    sns.barplot(x=x_labels, y=y_values, palette='viridis')
+    sns.barplot(x=x_labels, y=y_values, hue=x_labels, legend=False, palette='viridis')
     plt.title(title)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
