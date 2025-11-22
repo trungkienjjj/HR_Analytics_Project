@@ -204,8 +204,6 @@ Dự án này là bài tập cá nhân, tuy nhiên xin gửi lời cảm ơn đ�
 - **Giảng viên hướng dẫn:** Thầy Lê Nhựt Nam đã cung cấp kiến thức nền tảng và định hướng đề tài.
 - **Cộng đồng Kaggle:** Đã cung cấp bộ dữ liệu *HR Analytics* chất lượng.
 
-Nếu bạn muốn đóng góp ý kiến hoặc báo lỗi, vui lòng tạo [Issue](https://github.com/username/HR_Analytics_Project/issues) hoặc gửi Pull Request.
-
 ---
 
 ## 11. Liên hệ (Contact)
