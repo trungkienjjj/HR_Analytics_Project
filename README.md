@@ -80,6 +80,11 @@ Mô hình được xây dựng dựa trên nền tảng toán học:
 - **Kỹ thuật Vectorization:**
   Thay vì dùng vòng lặp `for` để duyệt qua từng mẫu dữ liệu (rất chậm), mô hình sử dụng phép nhân ma trận (`np.dot`) để tính toán trên toàn bộ tập dữ liệu cùng lúc, tăng hiệu suất lên hàng trăm lần.
 
+  ### 3.3. Cân bằng dữ liệu (SMOTE from Scratch)
+Để giải quyết vấn đề mất cân bằng dữ liệu nghiêm trọng, thuật toán **SMOTE (Synthetic Minority Over-sampling Technique)** được cài đặt thủ công:
+- **Nguyên lý:** Tính toán khoảng cách Euclidean giữa các điểm dữ liệu thiểu số, tìm k-láng giềng gần nhất (KNN) và nội suy tuyến tính để sinh ra các mẫu dữ liệu mới.
+- **Kỹ thuật NumPy:** Sử dụng Broadcasting để tính ma trận khoảng cách mà không cần vòng lặp lồng nhau, tăng tốc độ xử lý.
+
 ---
 
 ## 4. Cài đặt & Hướng dẫn sử dụng
@@ -91,7 +96,7 @@ Mô hình được xây dựng dựa trên nền tảng toán học:
 ### 4.2. Cài đặt
 ```bash
 # 1. Clone repository
-git clone [https://github.com/username/HR_Analytics_Project.git](https://github.com/username/HR_Analytics_Project.git)
+git clone https://github.com/trungkienjjj/HR_Analytics_Project.git
 cd HR_Analytics_Project
 
 # 2. Cài đặt thư viện
@@ -140,19 +145,23 @@ Dưới đây là biểu đồ Learning Curve (trái) và Confusion Matrix (ph�
 HR_Analytics_Project/
 ├── data/
 │   ├── raw/                # Dữ liệu gốc (CSV)
-│   └── processed/          # Dữ liệu đã xử lý dạng mảng NumPy (.npy)
+│   └── processed/          # Dữ liệu đã xử lý (.npy)
 ├── notebooks/
-│   ├── 01_data_exploration.ipynb  # Phân tích khám phá dữ liệu (EDA)
-│   ├── 02_preprocessing.ipynb     # Làm sạch, xử lý chuỗi và chuẩn hóa
-│   └── 03_modeling.ipynb          # Cài đặt thuật toán và đánh giá
+│   ├── 01_data_exploration.ipynb  # EDA
+│   ├── 02_preprocessing.ipynb     # Preprocessing
+│   └── 03_modeling.ipynb          # Modeling & Evaluation
 ├── src/
 │   ├── __init__.py
-│   ├── data_processing.py  # Thư viện chứa các hàm xử lý dữ liệu thuần NumPy
-│   ├── visualization.py    # Các hàm hỗ trợ vẽ biểu đồ
-│   └── models.py           # Class LogisticRegression (Gradient Descent)
-├── README.md               # Tài liệu báo cáo dự án
-└── requirements.txt        # Danh sách thư viện cần thiết
+│   ├── data_processing.py  # Các hàm xử lý dữ liệu
+│   ├── visualization.py    # Các hàm vẽ biểu đồ
+│   └── models.py           # Logistic Regression & SMOTE
+├── IMG/                    # Chứa ảnh kết quả training/evaluation
+├── LICENSE                 # Giấy phép MIT
+├── README.md               # Tài liệu báo cáo
+└── requirements.txt        # Thư viện cần thiết
 ```
+
+---
 
 ## 7. Thách thức & Giải pháp
 
@@ -171,19 +180,25 @@ Trong quá trình thực hiện dự án với yêu cầu khắt khe là **"CH�
     - *Giải pháp:* Thêm một giá trị cực nhỏ `epsilon` ($1e-9$) vào trong hàm log (`np.log(y_pred + epsilon)`) để đảm bảo tính toán luôn an toàn.
 
 4.  **Dữ liệu mất cân bằng (Imbalanced Class):**
-    - *Vấn đề:* Số lượng ứng viên "Muốn đổi việc" (1) ít hơn nhiều so với "Không đổi việc" (0), dẫn đến chỉ số Recall thấp.
-    - *Giải pháp:* Tập trung phân tích kỹ Confusion Matrix để hiểu hành vi của Model thay vì chỉ nhìn vào Accuracy.
+    - *Vấn đề:* Lớp "Muốn đổi việc" (1) quá ít dẫn đến mô hình có xu hướng dự đoán toàn bộ là lớp 0 (Accuracy cao ảo nhưng Recall thấp).
+    - *Giải pháp:* Tự cài đặt thuật toán **SMOTE** bằng NumPy để sinh dữ liệu nhân tạo, giúp cân bằng tỷ lệ mẫu giữa hai lớp, qua đó cải thiện đáng kể chỉ số Recall.
 
 ---
 
 ## 8. Hướng phát triển (Future Improvements)
 
-Để cải thiện hiệu suất mô hình, đặc biệt là khả năng phát hiện nhóm ứng viên muốn nghỉ việc (Class 1), các hướng phát triển tiếp theo bao gồm:
+Mặc dù dự án đã hoàn thành các mục tiêu cơ bản, vẫn còn nhiều dư địa để cải tiến:
 
-- **Cân bằng dữ liệu:** Tự cài đặt thuật toán SMOTE hoặc Random Undersampling bằng NumPy để cân bằng tỷ lệ giữa hai lớp.
-- **Feature Engineering nâng cao:** Tạo thêm các đặc trưng mới, ví dụ: tỷ lệ số giờ training trên năm kinh nghiệm.
-- **Regularization:** Bổ sung L2 Regularization (Ridge) vào hàm mất mát để giảm thiểu hiện tượng Overfitting.
-- **Hyperparameter Tuning:** Thử nghiệm Grid Search thủ công để tìm ra Learning Rate và Số vòng lặp tối ưu nhất.
+1.  **Tối ưu hóa thuật toán (Advanced Optimization):**
+    - Cài đặt thêm các thuật toán tối ưu nâng cao như **Adam** hoặc **RMSProp** (thay vì Gradient Descent cơ bản) để mô hình hội tụ nhanh hơn.
+    - Triển khai **Mini-batch Gradient Descent** để xử lý tập dữ liệu lớn hiệu quả hơn về bộ nhớ.
+
+2.  **Mở rộng mô hình (Model Expansion):**
+    - Thử sức cài đặt **Neural Network (Multi-layer Perceptron)** đơn giản từ đầu bằng NumPy để nắm bắt các mối quan hệ phi tuyến tính phức tạp trong dữ liệu.
+    - Xây dựng cơ chế **Grid Search tự động** (viết tay) để tìm ra bộ tham số tối ưu (Learning rate, Lambda, K-neighbors cho SMOTE) thay vì thử thủ công.
+
+3.  **Triển khai (Deployment):**
+    - Đóng gói mô hình thành API đơn giản (sử dụng Flask/FastAPI) hoặc giao diện web (Streamlit) để người dùng có thể nhập thông tin và nhận dự đoán trực tiếp.
 
 ---
 
