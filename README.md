@@ -165,7 +165,7 @@ HR_Analytics_Project/
 
 ## 7. Thách thức & Giải pháp
 
-Trong quá trình thực hiện dự án với yêu cầu khắt khe là **"CHỈ sử dụng NumPy"** (không Pandas), nhóm đã đối mặt và giải quyết các thách thức kỹ thuật sau:
+Trong quá trình thực hiện dự án với yêu cầu khắt khe là **"CHỈ sử dụng NumPy"** (không Pandas), tôi đã đối mặt và giải quyết các thách thức kỹ thuật sau:
 
 1.  **Xử lý dữ liệu hỗn hợp (Mixed Data Types):**
     - *Vấn đề:* Mảng NumPy (`ndarray`) tối ưu cho dữ liệu đồng nhất (số toàn bộ). Tuy nhiên, tập dữ liệu nhân sự chứa cả số nguyên, số thực và chuỗi ký tự.
